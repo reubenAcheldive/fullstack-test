@@ -1,6 +1,8 @@
 import React from "react";
 import S from "styled-components";
+
 const AddReviewsContainerStyled = S.div`
+
 display: flex;
 flex-direction: column;
 align-items: flex-start;
@@ -54,6 +56,7 @@ order: 1;
 flex-grow: 0;
 `;
 const StretchLineStyled = S.span`
+display: flex;
 width: 390px;
 height: 1px;
 background: #EBEFF7;
@@ -63,7 +66,7 @@ align-self: stretch;
 flex-grow: 0;
 `;
 
-const discretionInputStyled = S.input`
+export const DiscretionInputStyled = S.input`
 width: 313px;
 height: 18px;
 font-family: 'Assistant';
@@ -77,22 +80,69 @@ color: #C4D2DC;
 flex: none;
 order: 0;
 flex-grow: 0;
+outline: none;
+border: none;
+::placeholder{
+  color: #C4D2DC;
+}
 `;
+
+const ButtonStyled = S.button`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px 20px 11px;
+gap: 5px;
+width: 64px;
+height: 45px;
+background: ${({ disabled }) => (!disabled ? "#FF206F" : "#DDE7F0")};
+border-radius: 10px;
+flex: none;
+order: 0;
+flex-grow: 0;
+border:none;
+color: #FFFFFF;
+display: flex;
+align-items: center;
+text-align: center;
+font-weight: 700;
+font-size: 14px;
+line-height: 18px;
+`;
+
 
 const AddReviews = () => {
   return (
-    <div>
+    <>
       <AddReviewsContainerStyled>
-        <span style={{ display: "flex" }}>
+        <div style={{ display: "flex" }}>
           <TitleInputStyled placeholder="Enter review title" />
           <CountWordStyled> 0/255</CountWordStyled>
-        </span>
-        <StretchLineStyled />
-        
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column-reverse",
+            gap: "10px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              gap: "13px",
+            }}
+          >
+            <ButtonStyled onClick={()=>console.log(1)} disabled={false}>Add</ButtonStyled>
+            <DiscretionInputStyled placeholder="Write your review text..." />
+          </div>
+          <StretchLineStyled />
+        </div>
+     
       </AddReviewsContainerStyled>
-    </div>
+    </>
   );
 };
 
 export default AddReviews;
-//"section"
