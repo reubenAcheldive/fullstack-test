@@ -2,8 +2,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
- 
+
 }
-html body{
+
+html body {
   background: #C4D2DC;
+}
+
+.review-container {
+  overflow: 'auto';
+  padding: 15px;
+  
+}
+.review-container::-webkit-scrollbar {
+  display: none;
 }

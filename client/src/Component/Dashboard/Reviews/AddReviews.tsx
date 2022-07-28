@@ -129,9 +129,9 @@ const AddReviews = ({ setReviews, reviews }: Props) => {
 
     switch (name) {
       case "title":
-        return setValues({ ...values, title: value });
+        return value.length < 255 && setValues({ ...values, title: value });
       case "description":
-        return setValues({ ...values, description: value });
+        return value.length < 255  && setValues({ ...values, description: value });
       default:
     }
   };
@@ -145,6 +145,7 @@ const AddReviews = ({ setReviews, reviews }: Props) => {
         const { data } = await reviewsService.createReview({ ...values });
 
         setReviews([...reviews, data]);
+        setValues({ title: '', description: '' });
       } catch (error) {
         alert(error);
       }
@@ -159,8 +160,9 @@ const AddReviews = ({ setReviews, reviews }: Props) => {
             placeholder="Enter review title"
             onChange={getValuesToCreateNewReview}
             name="title"
+            value={values.title}
           />
-          <CountWordStyled> 0/255</CountWordStyled>
+          <CountWordStyled> {values.title.length+values.description.length} / 255</CountWordStyled>
         </div>
         <div
           style={{
@@ -176,13 +178,14 @@ const AddReviews = ({ setReviews, reviews }: Props) => {
               gap: "13px",
             }}
           >
-            <ButtonStyled type="submit" disabled={false}>
+            <ButtonStyled type="submit" disabled={!isEmpty(values)}>
               Add
             </ButtonStyled>
             <DiscretionInputStyled
               placeholder="Write your review text..."
               onChange={getValuesToCreateNewReview}
               name="description"
+              value={values.description}
             />
           </div>
           <StretchLineStyled />

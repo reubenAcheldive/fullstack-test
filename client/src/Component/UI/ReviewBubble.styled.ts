@@ -1,11 +1,11 @@
 import S from "styled-components";
-
+import { ButtonProps, ButtonStyled } from "./Button";
 export const ReviewBubbleContainerWrap = S.div`
 display: flex;
 flex-direction: column-reverse;
 gap: 10px;
 flex-wrap: wrap;
-
+width: auto;
 
 
 `;
@@ -20,6 +20,12 @@ min-width: auto;
 height: 75%;
 background: rgba(255, 255, 255, 0.1);
 border-radius: 10px 10px 10px 2px;
+position: relative;
+width: auto;
+&:hover{
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
 
 `;
 export const ReviewBubbleTitle = S(ReviewBubbleContainer)`
@@ -35,6 +41,7 @@ height: 16px;
 background:none;
 color:#fff;
 
+
 `;
 export const ReviewBubbleDescription = S(ReviewBubbleContainer)`
 font-style: normal;
@@ -44,8 +51,26 @@ line-height: 16px;
 flex: none;
 order: 1;
 flex-grow: 0;
-width: 95px;
+width: auto;
 height: 16px;
 background:none;
 color:#FFFFFF;
+`;
+export const DeletedButtonStyle = S(ButtonStyled)<Partial<ButtonProps>>`
+display:none;
+${ReviewBubbleContainer}:hover & {
+    position: absolute;
+    display: block;
+    right: 0%;
+    top: -10%;
+    bottom: 0%;
+    color:#fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+
+
+
 `;

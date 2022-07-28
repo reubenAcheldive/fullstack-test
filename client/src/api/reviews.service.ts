@@ -14,6 +14,6 @@ export const reviewsService = {
       description,
     });
   },
-  deleteReview: async (): Promise<AxiosResponse<void>> =>
-    await instance.get<void>("/delete-review"),
+  deleteReview: async (_id: string): Promise<AxiosResponse<void>> =>
+    await instance.delete<void>("/delete-review", { data: { _id } }),
 };
