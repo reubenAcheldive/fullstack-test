@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllReviews = void 0;
+exports.createOneReview = exports.deleteReviewById = exports.getAllReviews = void 0;
 const ReviewsService = __importStar(require("../services/reviews.service"));
 const getAllReviews = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -44,3 +44,32 @@ const getAllReviews = (req, res, next) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.getAllReviews = getAllReviews;
+const deleteReviewById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { _id } = req.body;
+        yield ReviewsService.deleteOneReview(_id);
+        return res.send({ message: "success" });
+    }
+    catch (error) {
+        return res.status(404).send({ message: "failed" });
+    }
+});
+exports.deleteReviewById = deleteReviewById;
+const createOneReview = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { title, description } = req.body;
+        if (!title.length || !description.length)
+            return res
+                .status(404)
+                .send({ message: "title or description can't be empty" });
+        const addReview = yield ReviewsService.createOneReview({
+            title,
+            description,
+        });
+        res.send(addReview);
+    }
+    catch (error) {
+        return res.status(404).send({ message: error.message });
+    }
+});
+exports.createOneReview = createOneReview;
