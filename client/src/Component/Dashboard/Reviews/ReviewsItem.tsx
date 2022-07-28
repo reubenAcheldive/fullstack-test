@@ -15,9 +15,11 @@ const ReviewsItem = () => {
         LineHeight="16px"
         background=" "
         color="#C4D2DC"
-        fontHeight=""
+        fontWeight=""
         fontSize="14px"
         height="32px"
+        order="0"
+        flexGrow="0"
       >
         <span>No reviews added yet.</span>
         <span>Learn how to add reviews</span>
@@ -31,7 +33,6 @@ const ReviewsItem = () => {
           <ReviewBubbleTitle>Hello</ReviewBubbleTitle>
           <ReviewBubbleDescription>Hello1</ReviewBubbleDescription>
         </ReviewBubbleContainer>
-     
       </ReviewBubbleContainerWrap>
     </div>
   );

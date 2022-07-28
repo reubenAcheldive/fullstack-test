@@ -33,6 +33,7 @@ flex-grow: 0;
 width: 63px;
 height: 16px;
 background:none;
+color:#fff;
 
 `;
 export const ReviewBubbleDescription = S(ReviewBubbleContainer)`
@@ -46,4 +47,5 @@ flex-grow: 0;
 width: 95px;
 height: 16px;
 background:none;
+color:#FFFFFF;
 `;

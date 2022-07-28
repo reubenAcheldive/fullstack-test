@@ -1,0 +1,46 @@
+import S from "styled-components";
+export interface ButtonProps {
+  display: string;
+  flexDirection: string;
+  justifyContent: string;
+  alignItems: string;
+  padding: string;
+  gap: string;
+  width: string;
+  height: string;
+  background: string;
+  borderRadius: string;
+  flex: string;
+  order: string;
+  flexGrow: string;
+  border: string;
+  color: string;
+  textAlign: string;
+  fontWeight: string;
+  fontSize: string;
+  lineHeight: string;
+}
+export const ButtonStyled = S.button<Partial<ButtonProps>>`
+display:${(props) => props.display};
+flex-direction:${(props) => props.flexDirection};
+justify-content:${(props) => props.justifyContent};
+align-items:${(props) => props.alignItems};
+padding:${(props) => props.padding};
+gap:${(props) => props.gap};
+width:${(props) => props.width};
+height:${(props) => props.height};
+background:${(props) => props.background};
+border-radius:${(props) => props.borderRadius};
+flex:${(props) => props.flex};
+order:${(props) => props.order};
+flex-grow:${(props) => props.flexGrow};
+border:${(props) => props.border};
+color:${(props) => props.color};
+display:${(props) => props.display};
+align-items:${(props) => props.alignItems};
+text-align:${(props) => props.textAlign};
+font-weight:${(props) => props.fontWeight};
+font-size:${(props) => props.fontSize};
+line-height:${(props) => props.lineHeight};
+border:${(props) => props.background};
+`;

@@ -76,7 +76,7 @@ font-size: 14px;
 line-height: 18px;
 display: flex;
 align-items: center;
-color: #C4D2DC;
+color:#39454C;
 flex: none;
 order: 0;
 flex-grow: 0;
