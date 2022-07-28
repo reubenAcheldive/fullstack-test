@@ -47,6 +47,8 @@ exports.getAllReviews = getAllReviews;
 const deleteReviewById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { _id } = req.body;
+        if (!_id)
+            return res.status(404).send({ message: "_id is missing" });
         yield ReviewsService.deleteOneReview(_id);
         return res.send({ message: "success" });
     }
@@ -62,6 +64,7 @@ const createOneReview = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
             return res
                 .status(404)
                 .send({ message: "title or description can't be empty" });
+        console.log({ title, description });
         const addReview = yield ReviewsService.createOneReview({
             title,
             description,

@@ -1,4 +1,5 @@
 import React from "react";
+import { IReviews } from "../../../interface/Reviews.interface";
 import { GlobalParagraphStyle } from "../../UI/GlobalParagraph.styled";
 import {
   ReviewBubbleContainer,
@@ -6,8 +7,11 @@ import {
   ReviewBubbleDescription,
   ReviewBubbleTitle,
 } from "../../UI/ReviewBubble.styled";
-
-const ReviewsItem = () => {
+export interface Props {
+  reviews: IReviews[] | [];
+}
+const ReviewsItem = ({ reviews }: Props) => {
+  console.log(reviews)
   return (
     <div style={{ overflow: "auto", height: "100%", width: "100%" }}>
       <GlobalParagraphStyle
@@ -25,14 +29,12 @@ const ReviewsItem = () => {
         <span>Learn how to add reviews</span>
       </GlobalParagraphStyle>
       <ReviewBubbleContainerWrap>
-        <ReviewBubbleContainer>
-          <ReviewBubbleTitle>Hello</ReviewBubbleTitle>
-          <ReviewBubbleDescription>Hello1</ReviewBubbleDescription>
-        </ReviewBubbleContainer>
-        <ReviewBubbleContainer>
-          <ReviewBubbleTitle>Hello</ReviewBubbleTitle>
-          <ReviewBubbleDescription>Hello1</ReviewBubbleDescription>
-        </ReviewBubbleContainer>
+        {reviews?.map(({ title, description, _id }) => (
+          <ReviewBubbleContainer key={_id}>
+            <ReviewBubbleTitle>{title}</ReviewBubbleTitle>
+            <ReviewBubbleDescription>{description}</ReviewBubbleDescription>
+          </ReviewBubbleContainer>
+        ))}
       </ReviewBubbleContainerWrap>
     </div>
   );

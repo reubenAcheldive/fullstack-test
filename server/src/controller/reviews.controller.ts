@@ -20,6 +20,7 @@ export const deleteReviewById = async (
 ) => {
   try {
     const { _id } = req.body;
+    if(!_id) return res.status(404).send({ message: "_id is missing" });
     await ReviewsService.deleteOneReview(_id);
     return res.send({ message: "success" });
   } catch (error) {
@@ -28,16 +29,18 @@ export const deleteReviewById = async (
 };
 
 export const createOneReview = async (
-  req: Request<any, IReviews>,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
+  
     const { title, description }: IReviews = req.body;
     if (!title.length || !description.length)
       return res
         .status(404)
         .send({ message: "title or description can't be empty" });
+        console.log({title, description })
     const addReview = await ReviewsService.createOneReview({
       title,
       description,
