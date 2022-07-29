@@ -5,7 +5,7 @@ import { TagContainer, TagContext } from '../../UI/TagsButton';
 import { BiMessageAdd } from 'react-icons/bi';
 
 
-function Options() {
+function Options({generatedRandomReviewsHandler}:{generatedRandomReviewsHandler:() => void}) {
     return (
       <span
         style={{
@@ -55,6 +55,7 @@ function Options() {
           <GlobalParagraphStyle opacity="0.5"> &gt;</GlobalParagraphStyle>
         </TagContainer>
         <TagContainer
+        onClick={generatedRandomReviewsHandler}
           alignItems="baseline"
           background="#EBEFF7"
           justifyContent="space-around"

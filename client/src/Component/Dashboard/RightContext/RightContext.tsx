@@ -2,18 +2,31 @@ import React from "react";
 
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { BiMessageAdd, BiX } from "react-icons/bi";
+import { IReviews } from "../../../interface/Reviews.interface";
 import { ButtonStyled } from "../../UI/Button";
 import { SideRightPage } from "../../UI/Dashboard.styled";
 import { GlobalParagraphStyle } from "../../UI/GlobalParagraph.styled";
+import { StretchLineStyled } from "../../UI/ReviewsStyle/AddReviews.styled";
 import { TagContainer, TagContext } from "../../UI/TagsButton";
 import Options from "./Options";
 import Title from "./Title";
+import { generatedRandomReviews } from "./../../../utils/generatedReviews";
+import { texts, titles } from "../../../generic-reviews";
 
-
-const RightContext = () => {
+const RightContext = ({
+  reviews,
+  setReviews,
+}: {
+  reviews: IReviews[];
+  setReviews: React.Dispatch<React.SetStateAction<IReviews[]>>;
+}) => {
+  const generatedRandomReviewsHandler = () => {
+    const a = generatedRandomReviews(texts, titles);
+    setReviews(a);
+  };
   return (
     <SideRightPage>
-      <Title />
+      <Title reviews={reviews} />
       <span>
         <GlobalParagraphStyle
           style={{ textAlign: "start" }}
@@ -31,7 +44,7 @@ const RightContext = () => {
           App Store (Minimum 50 reviews).
         </GlobalParagraphStyle>
       </span>
-      <Options/>
+      <Options  generatedRandomReviewsHandler={generatedRandomReviewsHandler}/>
       <span style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <TagContainer
           alignItems="center"
@@ -53,7 +66,15 @@ const RightContext = () => {
           <TagContext color="#DC2D2D"> Clear all reviews</TagContext>
         </TagContainer>
       </span>
-      <span>
+
+      <span
+        style={{
+          display: "flex",
+          flexDirection: "column-reverse",
+          gap: "20px",
+        }}
+      >
+        <StretchLineStyled style={{ width: "280px", background: "#EBEFF7" }} />
         <ButtonStyled
           display="flex"
           flexDirection="row"
@@ -73,5 +94,4 @@ const RightContext = () => {
     </SideRightPage>
   );
 };
-
-export default RightContext;
+export default RightContext

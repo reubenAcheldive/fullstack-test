@@ -4,8 +4,9 @@ import { IReviews } from "../../interface/Reviews.interface";
 import { DashboardStyled } from "../UI/Dashboard.styled";
 
 import LeftContext from "./LeftContext/LeftContext";
-import RightContext from "./RightContext/RightContext";
+
 import { reviewsService } from "../../api/reviews.service";
+import RightContext from "./RightContext/RightContext";
 
 const Dashboard = () => {
   const [reviews, setReviews] = useState<IReviews[]>([]);
@@ -27,7 +28,7 @@ const Dashboard = () => {
     <>
       <DashboardStyled>
         <LeftContext reviews={reviews} setReviews={setReviews} />
-        <RightContext />
+        <RightContext reviews={reviews}  setReviews={setReviews} />
       </DashboardStyled>
     </>
   );

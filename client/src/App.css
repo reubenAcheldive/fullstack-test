@@ -17,3 +17,6 @@ html body {
 .review-container::-webkit-scrollbar {
   display: none;
 }
+button{
+  cursor: pointer;
+}

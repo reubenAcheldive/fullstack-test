@@ -1,8 +1,9 @@
 import React from "react";
 import { TitleWarper } from "../../UI/Dashboard.styled";
 import { GlobalParagraphStyle } from "../../UI/GlobalParagraph.styled";
+import { IReviews } from "./../../../interface/Reviews.interface";
 
-function Title() {
+function Title({ reviews }: { reviews: IReviews[] }) {
   return (
     <TitleWarper>
       <GlobalParagraphStyle
@@ -16,7 +17,7 @@ function Title() {
         flexGrow="0"
         order="0"
       >
-        0
+        {reviews.length}
       </GlobalParagraphStyle>
 
       <GlobalParagraphStyle

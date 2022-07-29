@@ -19,6 +19,7 @@ export interface TagContainerProps {
 }
 
 export const TagContainer = S.span<TagContainerProps>`
+cursor: pointer;
 display: ${(props) => props?.display};
 flex-direction: ${(props) => props?.flexDirection};
 align-items: ${(props) => props?.alignItems};

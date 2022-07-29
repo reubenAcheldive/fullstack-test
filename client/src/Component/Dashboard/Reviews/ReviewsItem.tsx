@@ -15,7 +15,12 @@ export interface Props {
   setReviews: React.Dispatch<React.SetStateAction<IReviews[]>>;
 }
 const ReviewsItem = ({ reviews, setReviews }: Props) => {
-  const deletedOneItemReview = async (_id: string) => {
+  const deletedOneItemReview = async (_id: string, title?: string) => {
+    console.log({ _id }, { title });
+    if (_id === undefined) {
+      let removeItem = reviews?.filter((render) => render.title !== title);
+      return setReviews(removeItem);
+    }
     try {
       if (await reviewsService.deleteReview(_id)) {
         let removeItem = reviews?.filter((render) => render._id !== _id);
@@ -47,7 +52,7 @@ const ReviewsItem = ({ reviews, setReviews }: Props) => {
       )}
       <ReviewBubbleContainerWrap>
         {reviews?.map(({ title, description, _id }) => (
-          <ReviewBubbleContainer key={_id}>
+          <ReviewBubbleContainer key={title}>
             <ReviewBubbleTitle>{title}</ReviewBubbleTitle>
             <ReviewBubbleDescription>{description}</ReviewBubbleDescription>
             <DeletedButtonStyle
@@ -55,7 +60,7 @@ const ReviewsItem = ({ reviews, setReviews }: Props) => {
               width="20px"
               height="20px"
               borderRadius="8rem"
-              onClick={() => deletedOneItemReview(_id!)}
+              onClick={() => deletedOneItemReview(_id!, title)}
             >
               x
             </DeletedButtonStyle>
