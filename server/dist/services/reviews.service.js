@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createAllReview = exports.createOneReview = exports.deleteOneReview = exports.getAllReviews = void 0;
+exports.deleteAllReview = exports.createOneReview = exports.deleteOneReview = exports.getAllReviews = void 0;
 const reviews_schema_1 = require("../db/collections/reviews.schema");
 const getAllReviews = () => __awaiter(void 0, void 0, void 0, function* () {
     return yield reviews_schema_1.ReviewSchema.find({});
@@ -23,7 +23,7 @@ const createOneReview = ({ description, title, }) => __awaiter(void 0, void 0, v
     return yield reviews_schema_1.ReviewSchema.create({ description, title });
 });
 exports.createOneReview = createOneReview;
-const createAllReview = ({ description, title, }) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteAllReview = () => __awaiter(void 0, void 0, void 0, function* () {
     yield reviews_schema_1.ReviewSchema.deleteMany({});
 });
-exports.createAllReview = createAllReview;
+exports.deleteAllReview = deleteAllReview;

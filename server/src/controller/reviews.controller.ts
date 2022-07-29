@@ -52,6 +52,11 @@ export const createOneReview = async (
 };
 
 export const deleteAllReviews =async (req: Request, res: Response): Promise<void> => {
+ try {
+  console.log(1)
   await ReviewsService.deleteAllReview()
   res.send({ message: "reviews are deleted"})
+ } catch (error) {
+  res.send(error)
+ }
 }

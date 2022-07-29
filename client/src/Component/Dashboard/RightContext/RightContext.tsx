@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
-import { AiOutlineFileAdd } from "react-icons/ai";
-import { BiMessageAdd, BiX } from "react-icons/bi";
 import { IReviews } from "../../../interface/Reviews.interface";
 import { ButtonStyled } from "../../UI/Button";
 import { SideRightPage } from "../../UI/Dashboard.styled";
@@ -12,6 +10,8 @@ import Options from "./Options";
 import Title from "./Title";
 import { generatedRandomReviews } from "./../../../utils/generatedReviews";
 import { texts, titles } from "../../../generic-reviews";
+import { BiX } from "react-icons/bi";
+import { reviewsService } from "../../../api/reviews.service";
 
 const RightContext = ({
   reviews,
@@ -20,10 +20,41 @@ const RightContext = ({
   reviews: IReviews[];
   setReviews: React.Dispatch<React.SetStateAction<IReviews[]>>;
 }) => {
+  const [csvData, setCsvData] = useState<{ title: string; text: string }[]>();
+
   const generatedRandomReviewsHandler = () => {
     const a = generatedRandomReviews(texts, titles);
     setReviews(a);
   };
+  const [isCanSave, setIsCanSave] = useState<boolean>(false);
+  const handleForce = (data: any, fileInfo: any) => setCsvData(data);
+  useEffect(() => {
+    if (csvData?.length) {
+      setIsCanSave(true);
+    }
+  }, [csvData]);
+
+  const getFileCsvDataHandler = () => {
+    const normalizeImport = csvData?.map((csv, i) => {
+      return {
+        title: csv.title,
+        description: csv.text,
+      };
+    });
+    if (normalizeImport) {
+      setReviews(normalizeImport);
+      setIsCanSave(false);
+    }
+  };
+  const clearAndDeleteReviewsFromDbHandler = async () => {
+    try {
+      setReviews([]);
+      await reviewsService.deleteAllReviews();
+    } catch (error:any) {
+      return new Error(error?.message);
+    }
+  };
+
   return (
     <SideRightPage>
       <Title reviews={reviews} />
@@ -44,7 +75,10 @@ const RightContext = ({
           App Store (Minimum 50 reviews).
         </GlobalParagraphStyle>
       </span>
-      <Options  generatedRandomReviewsHandler={generatedRandomReviewsHandler}/>
+      <Options
+        handleForce={handleForce}
+        generatedRandomReviewsHandler={generatedRandomReviewsHandler}
+      />
       <span style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <TagContainer
           alignItems="center"
@@ -61,6 +95,7 @@ const RightContext = ({
           padding="10px 20px 11px 10px"
           width="280px"
           borderRadius="10px"
+          onClick={() => clearAndDeleteReviewsFromDbHandler()}
         >
           <BiX style={{ color: "#DC2D2D" }} />
           <TagContext color="#DC2D2D"> Clear all reviews</TagContext>
@@ -84,9 +119,11 @@ const RightContext = ({
           gap="5px"
           width="280px"
           height="45px"
-          background="#DDE7F0"
+          background={isCanSave ? "#FF206F" : "#DDE7F0"}
           borderRadius="10px"
-          color="rgba(255, 255, 255, 0.5);"
+          color={isCanSave ? "#FFF" : "rgba(255, 255, 255, 0.5)"}
+          onClick={getFileCsvDataHandler}
+          disabled={!isCanSave}
         >
           Save
         </ButtonStyled>
@@ -94,4 +131,4 @@ const RightContext = ({
     </SideRightPage>
   );
 };
-export default RightContext
+export default RightContext;

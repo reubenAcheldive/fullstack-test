@@ -18,7 +18,7 @@ export interface TagContainerProps {
   border?: string | null;
 }
 
-export const TagContainer = S.span<TagContainerProps>`
+export const TagContainer = S.button<TagContainerProps>`
 cursor: pointer;
 display: ${(props) => props?.display};
 flex-direction: ${(props) => props?.flexDirection};
@@ -33,8 +33,11 @@ border-radius: ${(props) => props?.borderRadius};
 order: ${(props) => props?.order};
 flex-grow: ${(props) => props?.flexGrow};
 display: flex;
-border:${({ border }) => border && border}
+border:none;
+
 `;
+
+
 
 export const Button = S.button`
 
@@ -64,10 +67,6 @@ flex-grow: 1;
 
 `;
 
-
-
-
-
 export const TagContext = S.span<{ color?: string | null }>`
 font-family: 'Assistant';
 font-style: normal;
@@ -83,4 +82,3 @@ align-items: center;
 text-align: center;
 color: ${({ color }) => (color ? color : "#64757E")};
 `;
-

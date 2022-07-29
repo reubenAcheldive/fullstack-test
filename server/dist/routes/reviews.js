@@ -29,4 +29,5 @@ const reviewsRoute = (0, express_1.Router)();
 reviewsRoute.get("/get-reviews", reviewsController.getAllReviews);
 reviewsRoute.post("/create-review", reviewsController.createOneReview);
 reviewsRoute.delete("/delete-review", reviewsController.deleteReviewById);
+reviewsRoute.delete("/delete-all-reviews", reviewsController.deleteAllReviews);
 exports.default = reviewsRoute;

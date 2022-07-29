@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createOneReview = exports.deleteReviewById = exports.getAllReviews = void 0;
+exports.deleteAllReviews = exports.createOneReview = exports.deleteReviewById = exports.getAllReviews = void 0;
 const ReviewsService = __importStar(require("../services/reviews.service"));
 const getAllReviews = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -76,3 +76,14 @@ const createOneReview = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
     }
 });
 exports.createOneReview = createOneReview;
+const deleteAllReviews = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log(1);
+        yield ReviewsService.deleteAllReview();
+        res.send({ message: "reviews are deleted" });
+    }
+    catch (error) {
+        res.send(error);
+    }
+});
+exports.deleteAllReviews = deleteAllReviews;
