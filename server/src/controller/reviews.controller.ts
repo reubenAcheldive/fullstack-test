@@ -50,3 +50,8 @@ export const createOneReview = async (
     return res.status(404).send({ message: error.message });
   }
 };
+
+export const deleteAllReviews =async (req: Request, res: Response): Promise<void> => {
+  await ReviewsService.deleteAllReview()
+  res.send({ message: "reviews are deleted"})
+}

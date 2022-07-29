@@ -13,9 +13,6 @@ export const createOneReview = async ({
 }: IReviews): Promise<IReviews> => {
   return await ReviewSchema.create({ description, title });
 };
-export const createAllReview = async ({
-  description,
-  title,
-}: IReviews): Promise<void> => {
+export const deleteAllReview = async (): Promise<void> => {
   await ReviewSchema.deleteMany({});
 };
