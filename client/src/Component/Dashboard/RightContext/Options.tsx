@@ -5,7 +5,10 @@ import { TagContainer, TagContext } from "../../UI/TagsButton";
 import { BiMessageAdd } from "react-icons/bi";
 import { useRef } from "react";
 import CSVReader from "react-csv-reader";
-
+interface Props {
+  generatedRandomReviewsHandler: () => void;
+  handleForce: (data: any, fileInfo: any) => void;
+}
 const papaparseOptions = {
   header: true,
   dynamicTyping: true,
@@ -13,15 +16,7 @@ const papaparseOptions = {
   transformHeader: (header: string) => header.toLowerCase().replace(/\W/g, "_"),
 };
 
-function Options({
-  generatedRandomReviewsHandler,
-  handleForce,
-
-}: {
-  generatedRandomReviewsHandler: () => void;
-  handleForce: (data: any, fileInfo: any) => void;
-
-}) {
+function Options({ generatedRandomReviewsHandler, handleForce }: Props) {
   const fileUpload = useRef<any>(null);
 
   return (
@@ -75,7 +70,6 @@ function Options({
         padding="10px 10px 11px"
         width="280px"
         onClick={() => {
-          
           fileUpload?.current.click();
         }}
       >

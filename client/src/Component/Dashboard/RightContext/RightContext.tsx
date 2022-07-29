@@ -12,19 +12,16 @@ import { generatedRandomReviews } from "./../../../utils/generatedReviews";
 import { texts, titles } from "../../../generic-reviews";
 import { BiX } from "react-icons/bi";
 import { reviewsService } from "../../../api/reviews.service";
-
-const RightContext = ({
-  reviews,
-  setReviews,
-}: {
+interface Props {
   reviews: IReviews[];
   setReviews: React.Dispatch<React.SetStateAction<IReviews[]>>;
-}) => {
+}
+const RightContext = ({ reviews, setReviews }: Props) => {
   const [csvData, setCsvData] = useState<{ title: string; text: string }[]>();
 
   const generatedRandomReviewsHandler = () => {
-    const a = generatedRandomReviews(texts, titles);
-    setReviews(a);
+    const randomReviews = generatedRandomReviews(texts, titles);
+    setReviews(randomReviews);
   };
   const [isCanSave, setIsCanSave] = useState<boolean>(false);
   const handleForce = (data: any, fileInfo: any) => setCsvData(data);
@@ -50,7 +47,7 @@ const RightContext = ({
     try {
       setReviews([]);
       await reviewsService.deleteAllReviews();
-    } catch (error:any) {
+    } catch (error: any) {
       return new Error(error?.message);
     }
   };

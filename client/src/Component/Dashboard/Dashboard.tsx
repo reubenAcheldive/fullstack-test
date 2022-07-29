@@ -15,24 +15,23 @@ const Dashboard = () => {
     try {
       const { data } = await reviewsService.fetchReviews();
       setReviews(data);
-    } catch (error) {}
+    } catch (error:any) {
+      new Error(error.message)
+    }
   };
   useEffect(() => {
     fetchReviews();
   }, []);
 
-
-
-
   return (
     <>
       <DashboardStyled>
         <LeftContext reviews={reviews} setReviews={setReviews} />
-        <RightContext reviews={reviews}  setReviews={setReviews} />
+        <RightContext reviews={reviews} setReviews={setReviews} />
       </DashboardStyled>
     </>
   );
 };
 
 export default Dashboard;
-// "handle with integration with api to create Reviews"
+

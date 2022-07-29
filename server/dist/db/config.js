@@ -15,6 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connect = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const connect = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield mongoose_1.default.connect("mongodb://localhost:27017/ReviewsManger");
+    yield mongoose_1.default.connect("mongodb+srv://Reviews:nHoaj7JXjOFMMQYQ@rouven.ngg77.mongodb.net/?retryWrites=true&w=majority");
 });
 exports.connect = connect;
